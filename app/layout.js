@@ -22,7 +22,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="w-full flex bg-gray-700 items-center bg-red justify-around py-4">
+        <nav
+          dir="rtl"
+          className="w-full flex bg-gray-900 items-center  justify-around py-4"
+        >
+          <div className="w-28">
+            <img src="/img/Law.png" alt="Logo" className="w-full h-auto" />
+          </div>
+
           <ul className="flex gap-10 text-white">
             <li className="cursor-pointer hover:text-gray-500 transition">
               الرئيسية
@@ -37,10 +44,6 @@ export default function RootLayout({ children }) {
               تواصل معنا
             </li>
           </ul>
-
-          <div className="w-28">
-            <img src="/img/Law.png" alt="Logo" className="w-full h-auto" />
-          </div>
         </nav>
         {children}
       </body>
