@@ -24,27 +24,39 @@ export default function RootLayout({ children }) {
       >
         <nav
           dir="rtl"
-          className="w-full flex bg-gray-900 items-center  justify-around py-4"
+          // className="w-full flex bg-gradient-to-r from-amber-200 via-white to-amber-200 shadow-lg shadow-amber-500/20 items-center justify-around py-4 transition-all duration-300"
+          className="w-full flex bg-gradient-to-r from-amber-100 via-amber-200 to-amber-100 shadow-lg shadow-amber-500/20 items-center justify-around py-4 transition-all duration-300"
         >
-          <div className="w-28">
-            <img src="/img/Law.png" alt="Logo" className="w-full h-auto" />
+          {/* <div className="absolute inset-0 bg-[linear-gradient(rgba(180,83,9,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(180,83,9,0.03)_1px,transparent_1px)] bg-[size:100px_100px]"></div> */}
+
+          <div className="w-28 transform hover:scale-105 transition-transform duration-300">
+            <img
+              src="/img/Law.png"
+              alt="Logo"
+              className="w-full h-auto drop-shadow-md"
+            />
           </div>
 
-          <ul className="flex gap-10 text-white">
-            <li className="cursor-pointer hover:text-gray-500 transition">
+          <ul className="flex gap-10 text-neutral-800">
+            <li className="relative group cursor-pointer font-medium hover:text-amber-600 transition-colors duration-300">
               الرئيسية
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300"></span>
             </li>
-            <li className="cursor-pointer hover:text-gray-500 transition">
+            <li className="relative group cursor-pointer font-medium hover:text-amber-600 transition-colors duration-300">
               خدماتنا
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300"></span>
             </li>
-            <li className="cursor-pointer hover:text-gray-500 transition">
+            <li className="relative group cursor-pointer font-medium hover:text-amber-600 transition-colors duration-300">
               لماذا تختارنا
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300"></span>
             </li>
-            <li className="cursor-pointer hover:text-gray-500 transition">
+            <li className="relative group cursor-pointer font-medium hover:text-amber-600 transition-colors duration-300">
               تواصل معنا
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300"></span>
             </li>
           </ul>
         </nav>
+
         {children}
       </body>
     </html>

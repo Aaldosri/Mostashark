@@ -49,21 +49,26 @@ export default function AnimationIcon() {
       <div className="absolute inset-0 flex items-center justify-center">
         <div
           className="relative w-[280px] sm:w-[350px] lg:w-[400px] h-[280px] sm:h-[350px] lg:h-[400px] 
-             rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden blob-animated"
+             rounded-[2rem] border-2 border-amber-600/40 shadow-2xl shadow-amber-900/20 overflow-hidden blob-animated"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-[inherit]"></div>
+          {/* الخلفية الداكنة */}
+          <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-amber-950 backdrop-blur-lg rounded-[inherit]"></div>
+
+          {/* طبقة ذهبية شفافة */}
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 rounded-[inherit]"></div>
 
           {/* Map على العناصر */}
           <div>
             {ELEMENTS.map((el, index) => (
               <motion.div
                 key={el.id}
-                className="absolute"
+                className="absolute text-4xl sm:text-5xl lg:text-6xl filter drop-shadow-[0_4px_12px_rgba(251,191,36,0.4)]"
                 style={{
                   top: el.top,
                   bottom: el.bottom,
                   left: el.left,
                   right: el.right,
+                  transform: "translate(-50%, -50%)",
                 }}
                 initial={{ x: 0, y: 0, rotate: el.rotate[0] }}
                 animate={{
@@ -76,7 +81,7 @@ export default function AnimationIcon() {
                   repeat: Infinity,
                   repeatType: "loop",
                   ease: "easeInOut",
-                  delay: index * 0.5, // كل عنصر يبدأ بعد نصف ثانية من اللي قبله
+                  delay: index * 0.5,
                 }}
               >
                 {el.emoji}
@@ -105,6 +110,10 @@ export default function AnimationIcon() {
           50% {
             transform: translateY(-15px) scale(1.05);
           }
+        }
+        .blob-animated {
+          animation: morph 8s ease-in-out infinite,
+            float 6s ease-in-out infinite;
         }
       `}</style>
     </div>
