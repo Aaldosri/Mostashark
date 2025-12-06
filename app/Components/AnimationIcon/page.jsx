@@ -1,119 +1,215 @@
 "use client";
 
-import { FileText, Gavel, Pencil, Scale } from "lucide-react";
+import {
+  FileText,
+  Gavel,
+  Pencil,
+  Scale,
+  Briefcase,
+  Award,
+  Shield,
+} from "lucide-react";
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function AnimationIcon() {
-  const ELEMENTS = [
-    {
-      id: 1,
-      emoji: <Scale size={60} color="white" style={{ opacity: 0.2 }} />,
-      top: "20%",
-      left: "22%",
-      dx: 5,
-      dy: 5,
-      rotate: [0, 5, -5, 0],
-    },
-    {
-      id: 2,
-      emoji: <Gavel size={60} color="white" style={{ opacity: 0.2 }} />,
-      top: "30%",
-      right: "10%",
-      dx: 11,
-      dy: 5,
-      rotate: [0, 1, -6, 0],
-    },
-    {
-      id: 3,
-      emoji: <Pencil size={60} color="white" style={{ opacity: 0.2 }} />,
-      bottom: "20%",
-      left: "20%",
-      dx: 2,
-      dy: 15,
-      rotate: [0, 2, -2, 0],
-    },
-    {
-      id: 4,
-      emoji: <FileText size={60} color="white" style={{ opacity: 0.2 }} />,
-      bottom: "20%",
-      left: "60%",
-      dx: 7,
-      dy: 9,
-      rotate: [0, 2, -2, 0],
-    },
-  ];
+const ELEMENTS = [
+  {
+    id: 1,
+    icon: Scale,
+    position: { top: "15%", left: "15%" },
+    animation: { duration: 5, delay: 0 },
+    color: "text-amber-400",
+  },
+  {
+    id: 2,
+    icon: Gavel,
+    position: { top: "15%", right: "15%" },
+    animation: { duration: 6, delay: 0.5 },
+    color: "text-amber-300",
+  },
+  {
+    id: 3,
+    icon: FileText,
+    position: { bottom: "15%", left: "15%" },
+    animation: { duration: 5.5, delay: 1 },
+    color: "text-amber-500",
+  },
+  {
+    id: 4,
+    icon: Briefcase,
+    position: { bottom: "15%", right: "15%" },
+    animation: { duration: 6.5, delay: 1.5 },
+    color: "text-amber-400",
+  },
+  {
+    id: 5,
+    icon: Award,
+    position: { top: "50%", left: "10%" },
+    animation: { duration: 5, delay: 2 },
+    color: "text-amber-300",
+  },
+  {
+    id: 6,
+    icon: Shield,
+    position: { top: "50%", right: "10%" },
+    animation: { duration: 6, delay: 2.5 },
+    color: "text-amber-500",
+  },
+];
 
+export default function AnimationIcon() {
   return (
     <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] mt-8 lg:mt-0">
       <div className="absolute inset-0 flex items-center justify-center">
-        <div
-          className="relative w-[280px] sm:w-[350px] lg:w-[400px] h-[280px] sm:h-[350px] lg:h-[400px] 
-             rounded-[2rem] border-2 border-amber-600/40 shadow-2xl shadow-amber-900/20 overflow-hidden blob-animated"
+        {/* Main Container with Hexagon Shape */}
+        <motion.div
+          className="relative w-[300px] sm:w-[380px] lg:w-[450px] h-[300px] sm:h-[380px] lg:h-[450px]"
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 60,
+            repeat: Infinity,
+            ease: "linear",
+          }}
         >
-          {/* الخلفية الداكنة */}
-          <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-amber-950 backdrop-blur-lg rounded-[inherit]"></div>
+          {/* Outer Ring */}
+          <div className="absolute inset-0 rounded-full border-2 border-amber-500/30 animate-pulse-slow"></div>
 
-          {/* طبقة ذهبية شفافة */}
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 rounded-[inherit]"></div>
+          {/* Middle Ring */}
+          <div className="absolute inset-8 rounded-full border-2 border-amber-400/20"></div>
 
-          {/* Map على العناصر */}
-          <div>
-            {ELEMENTS.map((el, index) => (
+          {/* Inner Container */}
+          <motion.div
+            className="absolute inset-16 rounded-full bg-gradient-to-br from-neutral-900 via-amber-950 to-neutral-900 
+                       border-4 border-amber-500/40 shadow-2xl shadow-amber-500/30 overflow-hidden"
+            animate={{
+              scale: [1, 1.05, 1],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            {/* Glowing Effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-transparent to-amber-600/10"></div>
+
+            {/* Animated Gradient Overlay */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/10 to-transparent"
+              animate={{
+                x: ["-100%", "100%"],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            ></motion.div>
+
+            {/* Center Icon */}
+            <div className="absolute inset-0 flex items-center justify-center">
               <motion.div
-                key={el.id}
-                className="absolute text-4xl sm:text-5xl lg:text-6xl filter drop-shadow-[0_4px_12px_rgba(251,191,36,0.4)]"
-                style={{
-                  top: el.top,
-                  bottom: el.bottom,
-                  left: el.left,
-                  right: el.right,
-                  transform: "translate(-50%, -50%)",
-                }}
-                initial={{ x: 0, y: 0, rotate: el.rotate[0] }}
                 animate={{
-                  x: [0, el.dx, -el.dx, 0],
-                  y: [0, el.dy, -el.dy, 0],
-                  rotate: el.rotate,
+                  rotate: [0, 360],
+                  scale: [1, 1.1, 1],
                 }}
                 transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "easeInOut",
-                  delay: index * 0.5,
+                  rotate: {
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  },
+                  scale: {
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
                 }}
               >
-                {el.emoji}
+                <Scale className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-amber-400 drop-shadow-[0_0_20px_rgba(251,191,36,0.6)]" />
               </motion.div>
-            ))}
-          </div>
-        </div>
+            </div>
+          </motion.div>
+
+          {/* Floating Icons */}
+          {ELEMENTS.map((element) => {
+            const Icon = element.icon;
+            return (
+              <motion.div
+                key={element.id}
+                className="absolute"
+                style={element.position}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{
+                  opacity: [0.4, 0.8, 0.4],
+                  scale: [1, 1.2, 1],
+                  y: [0, -20, 0],
+                  rotate: [0, 10, -10, 0],
+                }}
+                transition={{
+                  duration: element.animation.duration,
+                  delay: element.animation.delay,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <div className="relative">
+                  {/* Glow Effect */}
+                  <div className="absolute inset-0 blur-xl bg-amber-500/30 rounded-full"></div>
+
+                  {/* Icon */}
+                  <Icon
+                    className={`relative w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 ${element.color} 
+                               drop-shadow-[0_0_15px_rgba(251,191,36,0.5)]`}
+                  />
+                </div>
+              </motion.div>
+            );
+          })}
+
+          {/* Orbiting Particles */}
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={`particle-${i}`}
+              className="absolute w-2 h-2 bg-amber-400 rounded-full"
+              style={{
+                top: "50%",
+                left: "50%",
+              }}
+              animate={{
+                x: [0, Math.cos((i * Math.PI * 2) / 8) * 140, 0],
+                y: [0, Math.sin((i * Math.PI * 2) / 8) * 140, 0],
+                opacity: [0, 0.6, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                delay: i * 0.5,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </motion.div>
       </div>
 
-      {/* Keyframes */}
+      {/* Custom Animations */}
       <style jsx>{`
-        @keyframes morph {
+        @keyframes pulse-slow {
           0%,
           100% {
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            opacity: 0.3;
+            transform: scale(1);
           }
           50% {
-            border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            opacity: 0.6;
+            transform: scale(1.02);
           }
         }
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0) scale(1);
-          }
-          50% {
-            transform: translateY(-15px) scale(1.05);
-          }
-        }
-        .blob-animated {
-          animation: morph 8s ease-in-out infinite,
-            float 6s ease-in-out infinite;
+
+        .animate-pulse-slow {
+          animation: pulse-slow 3s ease-in-out infinite;
         }
       `}</style>
     </div>
