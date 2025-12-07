@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import Footer from "./Components/Footer/page";
+import Header from "./Components/Header/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,50 +25,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav
-          dir="rtl"
-          // className="w-full flex bg-gradient-to-r from-amber-200 via-white to-amber-200 shadow-lg shadow-amber-500/20 items-center justify-around py-4 transition-all duration-300"
-          className="w-full flex bg-gradient-to-r from-amber-100 via-amber-200 to-amber-100 shadow-lg shadow-amber-500/20 items-center justify-around py-4 transition-all duration-300"
-        >
-          {/* <div className="absolute inset-0 bg-[linear-gradient(rgba(180,83,9,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(180,83,9,0.03)_1px,transparent_1px)] bg-[size:100px_100px]"></div> */}
-
-          <div className="w-28 transform hover:scale-105 transition-transform duration-300">
-            <img
-              src="/img/Law.png"
-              alt="Logo"
-              className="w-full h-auto drop-shadow-md"
-            />
-          </div>
-
-          <ul className="flex gap-10 text-neutral-800">
-            <Link href="/">
-              <li className="relative group cursor-pointer font-medium hover:text-amber-600 transition-colors duration-300">
-                الرئيسية
-                <span className="absolute bottom-0 right-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300"></span>
-              </li>
-            </Link>
-            <Link href="/Pages/Services">
-              <li className="relative group cursor-pointer font-medium hover:text-amber-600 transition-colors duration-300">
-                خدماتنا
-                <span className="absolute bottom-0 right-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300"></span>
-              </li>
-            </Link>
-            <Link href="/Pages/Features">
-              <li className="relative group cursor-pointer font-medium hover:text-amber-600 transition-colors duration-300">
-                لماذا تختارنا
-                <span className="absolute bottom-0 right-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300"></span>
-              </li>
-            </Link>
-            <Link href="/Pages/Contact">
-              <li className="relative group cursor-pointer font-medium hover:text-amber-600 transition-colors duration-300">
-                تواصل معنا
-                <span className="absolute bottom-0 right-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300"></span>
-              </li>
-            </Link>
-          </ul>
-        </nav>
+        <Header />
 
         {children}
+        <Footer />
       </body>
     </html>
   );

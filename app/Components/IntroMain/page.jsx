@@ -1,5 +1,6 @@
 import React from "react";
 import { Scale } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function IntroMain() {
   return (
@@ -36,17 +37,40 @@ export default function IntroMain() {
       </p>
 
       {/* CTA */}
-      <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-reveal [animation-delay:0.8s]">
-        <button className="group relative w-full sm:w-auto px-6 py-3 min-w-[160px]">
+      <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+        {/* Primary Button */}
+        <motion.button
+          className="group relative w-full sm:w-auto px-6 py-3 min-w-[160px]"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-600 rounded-lg"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-600 rounded-lg blur-lg group-hover:opacity-60 transition-opacity duration-500"></div>
+
+          {/* Glow Effect */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-600 rounded-lg blur-lg"
+            initial={{ opacity: 0.5 }}
+            whileHover={{ opacity: 0.8 }}
+            transition={{ duration: 0.3 }}
+          ></motion.div>
+
           <div className="relative flex items-center justify-center gap-2">
             <span className="text-white font-medium">تواصل معنا</span>
-            <svg
-              className="w-5 h-5 text-white transform group-hover:translate-x-1 transition-transform"
+            <motion.svg
+              className="w-5 h-5 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              animate={{ x: [0, -3, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
             >
               <path
                 strokeLinecap="round"
@@ -54,13 +78,34 @@ export default function IntroMain() {
                 strokeWidth="2"
                 d="M13 7l5 5m0 0l-5 5m5-5H6"
               />
-            </svg>
+            </motion.svg>
           </div>
-        </button>
+        </motion.button>
 
-        <button className="w-full sm:w-auto px-6 py-3 rounded-lg border border-amber-600/40 bg-white/60 backdrop-blur-lg text-amber-900 hover:bg-white/80 hover:text-neutral-900 transition-all min-w-[160px]">
-          تعرف على خدماتنا
-        </button>
+        {/* Secondary Button */}
+        <motion.button
+          className="w-full sm:w-auto px-6 py-3 rounded-lg border-2 border-amber-600/40 bg-white/60 backdrop-blur-lg text-amber-900 min-w-[160px] relative overflow-hidden"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.9, duration: 0.5 }}
+          whileHover={{
+            scale: 1.05,
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            borderColor: "rgba(217, 119, 6, 0.6)",
+          }}
+          whileTap={{ scale: 0.95 }}
+        >
+          {/* Shine Effect on Hover */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/20 to-transparent"
+            initial={{ x: "-100%" }}
+            whileHover={{ x: "100%" }}
+            transition={{ duration: 0.6 }}
+          />
+
+          <span className="relative font-medium">تعرف على خدماتنا</span>
+        </motion.button>
       </div>
     </div>
   );
