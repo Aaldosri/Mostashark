@@ -99,7 +99,7 @@ export default function ContactSection() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-neutral-50 via-amber-50/30 to-neutral-50">
+    <div className="relative overflow-hidden bg-gradient-to-b from-neutral-50 via-amber-50/30 to-neutral-50 mt-10">
       {/* Background Elements */}
       <div className="absolute inset-0">
         {/* Grid Pattern */}

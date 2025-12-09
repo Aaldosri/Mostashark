@@ -167,7 +167,7 @@ const itemVariants = {
 
 export default function FeaturesSection() {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-neutral-100 via-amber-50/40 to-neutral-100">
+    <div className="relative overflow-hidden bg-gradient-to-b from-neutral-100 via-amber-50/40 to-neutral-100 mt-10">
       {/* Background Elements */}
       <div className="absolute inset-0">
         {/* Grid Pattern */}

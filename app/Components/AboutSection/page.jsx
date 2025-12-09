@@ -45,7 +45,7 @@ export default function AboutSection() {
             {/* Image Container */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-amber-900/20 border-2 border-amber-600/30">
               <img
-                src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070"
+                src="/img/MainPic0.jpg"
                 alt="استشارات قانونية"
                 className="w-full h-[400px] sm:h-[500px] lg:h-[600px] object-cover transform group-hover:scale-105 transition-transform duration-700"
               />

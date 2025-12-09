@@ -14,11 +14,11 @@ export default function Header() {
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = lastScrollY;
 
-    if (latest > previous && latest > 150) {
-      // Scrolling down
+    if (latest > previous && latest > 50) {
+      // Scrolling down - hide completely
       setIsHidden(true);
-    } else {
-      // Scrolling up
+    } else if (latest < previous) {
+      // Scrolling up - show
       setIsHidden(false);
     }
 
@@ -47,11 +47,11 @@ export default function Header() {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(251,191,36,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(251,191,36,0.03)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/">
             <motion.div
-              className="w-24 sm:w-28 cursor-pointer"
+              className="w-20 sm:w-24 cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -99,7 +99,7 @@ export default function Header() {
           >
             <Link href="/Pages/Contact">
               <motion.button
-                className="group relative px-6 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-medium rounded-lg shadow-lg shadow-amber-500/30 overflow-hidden"
+                className="group relative px-5 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-medium rounded-lg shadow-lg shadow-amber-500/30 overflow-hidden text-sm"
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 10px 30px rgba(251, 191, 36, 0.4)",
