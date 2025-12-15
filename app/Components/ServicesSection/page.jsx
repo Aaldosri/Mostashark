@@ -10,6 +10,7 @@ import {
   Users,
   Building,
 } from "lucide-react";
+import Link from "next/link";
 
 // Services Data
 const SERVICES = [
@@ -300,43 +301,33 @@ export default function ServicesSection() {
           transition={{ delay: 0.3, duration: 0.6 }}
         >
           <div className="inline-flex flex-col sm:flex-row gap-4">
-            <motion.button
-              className="group px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-lg rounded-xl shadow-xl shadow-amber-500/30 flex items-center justify-center gap-2"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 20px 40px rgba(251, 191, 36, 0.4)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              احجز استشارة مجانية
-              <motion.svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                whileHover={{ x: -5 }}
-                transition={{ type: "spring", stiffness: 400 }}
+            <Link href="/Pages/Contact">
+              <motion.button
+                className="group px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-lg rounded-xl shadow-xl shadow-amber-500/30 flex items-center justify-center gap-2"
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 20px 40px rgba(251, 191, 36, 0.4)",
+                }}
+                whileTap={{ scale: 0.95 }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2.5"
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </motion.svg>
-            </motion.button>
-
-            <motion.button
-              className="px-8 py-4 rounded-xl border-2 border-amber-600/40 bg-white/60 backdrop-blur-lg text-amber-900 font-medium"
-              whileHover={{
-                scale: 1.05,
-                backgroundColor: "rgba(255, 255, 255, 0.8)",
-                borderColor: "rgba(217, 119, 6, 0.6)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              تواصل معنا الآن
-            </motion.button>
+                احجز استشارة مجانية
+                <motion.svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  whileHover={{ x: -5 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2.5"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </motion.svg>
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
       </div>

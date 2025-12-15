@@ -14,6 +14,7 @@ import {
   Clock,
   Star,
 } from "lucide-react";
+import Link from "next/link";
 
 // Counter Component with Animation
 function AnimatedCounter({ end, duration = 2000, suffix = "", prefix = "" }) {
@@ -434,31 +435,33 @@ export default function FeaturesSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <motion.button
-            className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-lg rounded-xl shadow-2xl shadow-amber-500/40 flex items-center justify-center gap-3 mx-auto"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 25px 50px rgba(251, 191, 36, 0.5)",
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            ابدأ معنا الآن
-            <motion.svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              whileHover={{ x: -5 }}
-              transition={{ type: "spring", stiffness: 400 }}
+          <Link href="/Pages/Contact">
+            <motion.button
+              className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-lg rounded-xl shadow-2xl shadow-amber-500/40 flex items-center justify-center gap-3 mx-auto"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 25px 50px rgba(251, 191, 36, 0.5)",
+              }}
+              whileTap={{ scale: 0.95 }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2.5"
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </motion.svg>
-          </motion.button>
+              ابدأ معنا الآن
+              <motion.svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                whileHover={{ x: -5 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2.5"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </motion.svg>
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </div>

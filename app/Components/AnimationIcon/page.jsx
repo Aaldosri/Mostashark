@@ -9,7 +9,7 @@ import {
   Award,
   Shield,
 } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 
 const ELEMENTS = [
@@ -57,7 +57,11 @@ const ELEMENTS = [
   },
 ];
 
-export default function AnimationIcon() {
+export default function AnimationIcon({ onReady }) {
+  useEffect(() => {
+    onReady?.(); // هنا الإشعار بأن الكمبوننت جاهز
+  }, []);
+
   return (
     <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] mt-8 lg:mt-0">
       <div className="absolute inset-0 flex items-center justify-center">

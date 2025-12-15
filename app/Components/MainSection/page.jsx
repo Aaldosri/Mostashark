@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Scale } from "lucide-react";
 import dynamic from "next/dynamic";
 import IntroMain from "@/app/Components/IntroMain/page";
@@ -12,6 +12,8 @@ const AnimationIcon = dynamic(
 );
 
 export default function MainSection() {
+  const [ready, setReady] = useState(false);
+
   return (
     <div
       dir="rtl"
@@ -40,7 +42,19 @@ export default function MainSection() {
 
             <IntroMain />
 
-            <AnimationIcon />
+            <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden">
+              {!ready && (
+                <div className="absolute inset-0 bg-amber-100/40 animate-pulse rounded-xl" />
+              )}
+
+              <div
+                className={`absolute inset-0 transition-opacity duration-300 ${
+                  ready ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <AnimationIcon onReady={() => setReady(true)} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
