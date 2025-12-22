@@ -15,7 +15,7 @@ export default function IntroMain() {
       >
         <motion.div
           className="inline-flex items-center px-3 py-1.5 border border-amber-600/30 rounded-full bg-white/80 backdrop-blur-lg shadow-lg shadow-amber-500/10"
-          whileHover={{ scale: 1.1, rotate: [0, -2, 2, 0] }}
+          whileHover={{ scale: 1.1, rotate: -2 }}
           transition={{ type: "spring", stiffness: 400 }}
         >
           <motion.div
