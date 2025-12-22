@@ -3,6 +3,7 @@ import "./globals.css";
 import Link from "next/link";
 import Footer from "./Components/Footer/page";
 import Header from "./Components/Header/page";
+import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,6 +23,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" type="image/png" href="/img/Avatar.png" />
+      </Head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
