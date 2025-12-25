@@ -22,7 +22,7 @@ export const metadata = {
 };
 
 const tajawal = localFont({
-  src: [{ path: "../public/fonts/Tajawal-Bold.ttf", weight: "700" }],
+  src: [{ path: "../public/Fonts/Tajawal-Bold.ttf", weight: "700" }],
   display: "swap",
 });
 
