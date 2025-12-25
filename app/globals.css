@@ -17,11 +17,13 @@
 }
 @font-face {
   font-family: TajBold;
+  font-weight: 700;
   src: url("/fonts/Tajawal-Bold.ttf");
 }
 
 body {
   font-family: TajBold;
+  font-weight: 700;
 }
 
 @keyframes morph {
