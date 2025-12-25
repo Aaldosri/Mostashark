@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function IntroMain() {
   return (
-    <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
+    <div className="space-y-6 mt-15 sm:space-y-8 text-center lg:text-left">
       {/* Badge */}
       <motion.div
         className="flex justify-center lg:justify-start"
@@ -29,11 +29,11 @@ export default function IntroMain() {
             transition={{ duration: 2, repeat: Infinity }}
           />
           <motion.span
-            className="mr-1 text-amber-900"
+            className="mr-1  text-amber-900"
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            <Scale className="w-5 h-5" />
+            <Scale className="w-8 h-8" />
           </motion.span>
         </motion.div>
       </motion.div>
