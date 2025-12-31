@@ -29,7 +29,7 @@ export default function IntroMain() {
             transition={{ duration: 2, repeat: Infinity }}
           />
           <motion.span
-            className="mr-1  text-amber-900"
+            className="mr-1 text-amber-900"
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
