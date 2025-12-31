@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Scale,
   FileText,
@@ -100,44 +100,51 @@ const cardVariants = {
 };
 
 export default function ServicesSection() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className="relative overflow-hidden bg-gradient-to-b from-neutral-50 via-amber-50/30 to-neutral-50 mt-10">
       {/* Background Elements */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(180,83,9,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(180,83,9,0.05)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(180,83,9,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(180,83,9,0.05)_1px,transparent_1px)] bg-[size:100px_100px]" />
 
-        {/* Animated Shapes */}
-        <motion.div
-          className="absolute top-1/4 -left-20 w-[30rem] lg:w-[40rem] h-[30rem] lg:h-[40rem] bg-gradient-to-br from-amber-300/30 to-amber-400/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -30, 20, 0],
-            scale: [1, 1.1, 0.9, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -right-20 w-[30rem] lg:w-[40rem] h-[30rem] lg:h-[40rem] bg-gradient-to-br from-yellow-300/25 to-amber-400/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, -30, 20, 0],
-            y: [0, 30, -20, 0],
-            scale: [1, 0.9, 1.1, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
+        {!reduceMotion && (
+          <>
+            {/* Top Circle */}
+            <motion.div
+              className="absolute top-1/4 -left-20 w-[25rem] lg:w-[35rem] h-[25rem] lg:h-[35rem] bg-gradient-to-br from-amber-300/30 to-amber-400/20 rounded-full blur-2xl"
+              animate={{
+                x: [0, 20, -15, 0],
+                y: [0, -15, 15, 0],
+                scale: [1, 1.05, 0.95, 1],
+              }}
+              transition={{
+                duration: 25,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            {/* Bottom Circle */}
+            <motion.div
+              className="absolute bottom-1/4 -right-20 w-[25rem] lg:w-[35rem] h-[25rem] lg:h-[35rem] bg-gradient-to-br from-yellow-300/25 to-amber-400/20 rounded-full blur-2xl"
+              animate={{
+                x: [0, -20, 15, 0],
+                y: [0, 15, -15, 0],
+                scale: [1, 0.95, 1.05, 1],
+              }}
+              transition={{
+                duration: 25,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
+            />
+          </>
+        )}
 
         {/* Glass Layer */}
-        <div className="absolute inset-0 backdrop-blur-[50px] sm:backdrop-blur-[100px]"></div>
+        <div className="absolute inset-0 backdrop-blur-[10px] sm:backdrop-blur-[20px]" />
       </div>
 
       {/* Content */}
@@ -148,19 +155,19 @@ export default function ServicesSection() {
         {/* Section Header */}
         <motion.div
           className="text-center mb-16 space-y-4"
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <motion.div
             className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-lg rounded-full border border-amber-600/30 shadow-lg mb-4"
-            whileHover={{ scale: 1.05 }}
+            whileHover={reduceMotion ? {} : { scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
             <motion.div
               className="w-2 h-2 rounded-full bg-amber-600 ml-2"
-              animate={{ scale: [1, 1.3, 1] }}
+              animate={reduceMotion ? {} : { scale: [1, 1.3, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
             <span className="text-amber-900 text-2xl font-medium">
@@ -193,40 +200,34 @@ export default function ServicesSection() {
         </motion.div>
 
         {/* Services Grid */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
+        <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {SERVICES.map((service) => {
             const Icon = service.icon;
             return (
               <motion.div
                 key={service.id}
-                variants={cardVariants}
-                whileHover={{
-                  y: -10,
-                  transition: { type: "spring", stiffness: 300 },
-                }}
+                whileHover={reduceMotion ? {} : { y: -5 }}
+                transition={{ type: "spring", stiffness: 260 }}
                 className="relative group"
               >
                 {/* Glow Effect */}
-                <motion.div
-                  className="absolute -inset-1 bg-gradient-to-br from-amber-500/20 to-amber-600/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100"
-                  transition={{ duration: 0.3 }}
-                />
+                {!reduceMotion && (
+                  <motion.div className="absolute -inset-1 bg-gradient-to-br from-amber-500/20 to-amber-600/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                )}
 
                 {/* Card */}
                 <div className="relative bg-white/70 backdrop-blur-lg rounded-2xl p-6 border-2 border-amber-500/20 shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                  {/* Icon with Animation */}
+                  {/* Icon */}
                   <motion.div
                     className={`inline-flex p-4 bg-gradient-to-br ${service.gradient} rounded-xl mb-4 shadow-lg w-fit`}
-                    whileHover={{
-                      rotate: [0, -10, 10, -10, 0],
-                      scale: 1.1,
-                    }}
+                    whileHover={
+                      reduceMotion
+                        ? {}
+                        : {
+                            rotate: [0, -8, 8, 0],
+                            scale: 1.05,
+                          }
+                    }
                     transition={{ duration: 0.5 }}
                   >
                     <Icon className="w-7 h-7 text-white" />
@@ -248,14 +249,14 @@ export default function ServicesSection() {
                       <motion.div
                         key={idx}
                         className="flex items-center gap-2"
-                        initial={{ opacity: 0, x: -10 }}
+                        initial={{ opacity: 0, x: -5 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 }}
                       >
                         <motion.div
                           className="w-1.5 h-1.5 rounded-full bg-amber-500"
-                          whileHover={{ scale: 1.5 }}
+                          whileHover={reduceMotion ? {} : { scale: 1.4 }}
                         />
                         <span className="text-sm text-neutral-600">
                           {feature}
@@ -264,10 +265,10 @@ export default function ServicesSection() {
                     ))}
                   </div>
 
-                  {/* Learn More Link */}
+                  {/* Learn More */}
                   <motion.button
                     className="mt-4 text-amber-600 font-medium text-sm flex items-center gap-1"
-                    whileHover={{ gap: "0.5rem" }}
+                    whileHover={reduceMotion ? {} : { gap: "0.4rem" }}
                     transition={{ type: "spring", stiffness: 400 }}
                   >
                     اعرف المزيد
@@ -276,7 +277,7 @@ export default function ServicesSection() {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      whileHover={{ x: -3 }}
+                      whileHover={reduceMotion ? {} : { x: -2 }}
                     >
                       <path
                         strokeLinecap="round"
@@ -295,7 +296,7 @@ export default function ServicesSection() {
         {/* CTA Section */}
         <motion.div
           className="mt-16 text-center"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
@@ -304,10 +305,14 @@ export default function ServicesSection() {
             <Link href="/Pages/Contact">
               <motion.button
                 className="group px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-lg rounded-xl shadow-xl shadow-amber-500/30 flex items-center justify-center gap-2"
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(251, 191, 36, 0.4)",
-                }}
+                whileHover={
+                  reduceMotion
+                    ? {}
+                    : {
+                        scale: 1.03,
+                        boxShadow: "0 15px 30px rgba(251,191,36,0.3)",
+                      }
+                }
                 whileTap={{ scale: 0.95 }}
               >
                 احجز استشارة مجانية
@@ -316,7 +321,7 @@ export default function ServicesSection() {
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  whileHover={{ x: -5 }}
+                  whileHover={reduceMotion ? {} : { x: -3 }}
                   transition={{ type: "spring", stiffness: 400 }}
                 >
                   <path
