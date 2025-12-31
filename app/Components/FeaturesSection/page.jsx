@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import {
   Users,
   Calendar,
@@ -167,44 +167,38 @@ const itemVariants = {
 };
 
 export default function FeaturesSection() {
+  const reduceMotion = useReducedMotion();
+
+  // حركة خفيفة للأشكال الكبيرة
+  const floatingSlow = reduceMotion
+    ? {}
+    : { x: [0, 20, -10, 0], y: [0, -10, 10, 0], scale: [1, 1.05, 0.95, 1] };
+
   return (
     <div className="relative overflow-hidden bg-gradient-to-b from-neutral-100 via-amber-50/40 to-neutral-100 mt-10">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(180,83,9,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(180,83,9,0.05)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
-
-        {/* Animated Shapes */}
-        <motion.div
-          className="absolute top-1/4 -left-20 w-[30rem] lg:w-[40rem] h-[30rem] lg:h-[40rem] bg-gradient-to-br from-amber-300/30 to-amber-400/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -30, 20, 0],
-            scale: [1, 1.1, 0.9, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -right-20 w-[30rem] lg:w-[40rem] h-[30rem] lg:h-[40rem] bg-gradient-to-br from-yellow-300/25 to-amber-400/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, -30, 20, 0],
-            y: [0, 30, -20, 0],
-            scale: [1, 0.9, 1.1, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
-
-        {/* Glass Layer */}
-        <div className="absolute inset-0 backdrop-blur-[50px] sm:backdrop-blur-[100px]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(180,83,9,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(180,83,9,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
+        {!reduceMotion && (
+          <>
+            <motion.div
+              className="absolute top-1/4 -left-20 w-[28rem] lg:w-[35rem] h-[28rem] lg:h-[35rem] bg-gradient-to-br from-amber-300/20 to-amber-400/15 rounded-full blur-2xl"
+              animate={floatingSlow}
+              transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute bottom-1/4 -right-20 w-[28rem] lg:w-[35rem] h-[28rem] lg:h-[35rem] bg-gradient-to-br from-yellow-300/20 to-amber-400/15 rounded-full blur-2xl"
+              animate={floatingSlow}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
+            />
+          </>
+        )}
+        <div className="absolute inset-0 backdrop-blur-[20px] sm:backdrop-blur-[40px]" />
       </div>
 
       {/* Content */}
@@ -215,19 +209,19 @@ export default function FeaturesSection() {
         {/* Section Header */}
         <motion.div
           className="text-center mb-16 space-y-4"
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           <motion.div
-            className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-lg rounded-full border border-amber-600/30 shadow-lg mb-4"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400 }}
+            className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-lg rounded-full border border-amber-600/20 shadow-md mb-4"
+            whileHover={{ scale: reduceMotion ? 1 : 1.03 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             <motion.div
               className="w-2 h-2 rounded-full bg-amber-600 ml-2"
-              animate={{ scale: [1, 1.3, 1] }}
+              animate={reduceMotion ? {} : { scale: [1, 1.3, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
             <span className="text-amber-900 text-2xl font-medium">
@@ -237,10 +231,10 @@ export default function FeaturesSection() {
 
           <motion.h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
           >
             نحن الخيار{" "}
             <span className="bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent">
@@ -254,66 +248,35 @@ export default function FeaturesSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
           >
             أرقام وإنجازات تتحدث عن نفسها
           </motion.p>
         </motion.div>
 
         {/* Stats Counter */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {STATS.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <motion.div
                 key={stat.id}
-                variants={itemVariants}
-                whileHover={{
-                  y: -10,
-                  transition: { type: "spring", stiffness: 400 },
-                }}
+                whileHover={{ y: reduceMotion ? 0 : -5 }}
+                transition={{ type: "spring", stiffness: 250 }}
                 className="relative group"
               >
-                {/* Animated Glow */}
-                <motion.div
-                  className="absolute -inset-1 bg-gradient-to-r from-amber-500/30 to-amber-600/30 rounded-3xl blur-xl opacity-0 group-hover:opacity-100"
-                  transition={{ duration: 0.3 }}
-                />
-
-                {/* Card */}
-                <div className="relative bg-white/90 backdrop-blur-lg rounded-2xl p-6 border-2 border-amber-500/30 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
-                  {/* Background Pattern */}
-                  <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
-                    <Icon className="w-full h-full text-amber-600" />
+                <div className="relative bg-white/90 backdrop-blur-lg rounded-2xl p-6 border border-amber-500/20 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                  <div className="inline-flex p-3 bg-gradient-to-br from-amber-500/50 to-amber-600/50 rounded-xl mb-4 shadow relative z-10">
+                    <Icon className="w-6 h-6 text-white" />
                   </div>
-
-                  {/* Icon with Animation */}
                   <motion.div
-                    className={`inline-flex p-3 bg-gradient-to-br ${stat.color} rounded-xl mb-4 shadow-lg relative z-10`}
-                    whileHover={{
-                      rotate: [0, -10, 10, -10, 0],
-                      scale: 1.1,
-                    }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-                  </motion.div>
-
-                  {/* Number with Counter Animation */}
-                  <motion.div
-                    className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent mb-2"
+                    className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent mb-2"
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{
                       type: "spring",
-                      stiffness: 200,
+                      stiffness: 180,
                       delay: index * 0.1,
                     }}
                   >
@@ -323,124 +286,62 @@ export default function FeaturesSection() {
                       suffix={stat.suffix}
                     />
                   </motion.div>
-
-                  {/* Label */}
                   <p className="text-lg font-bold text-neutral-900 mb-1">
                     {stat.label}
                   </p>
                   <p className="text-xs text-neutral-600">{stat.description}</p>
-
-                  {/* Decorative Line */}
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-amber-500 to-amber-600"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: index * 0.1 }}
-                  />
                 </div>
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
 
         {/* Features Grid */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {FEATURES.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <motion.div
                 key={feature.id}
-                variants={itemVariants}
-                whileHover={{
-                  y: -10,
-                  transition: { type: "spring", stiffness: 300 },
-                }}
+                whileHover={{ y: reduceMotion ? 0 : -5 }}
+                transition={{ type: "spring", stiffness: 250 }}
                 className="relative group"
               >
-                {/* Glow Effect */}
-                <motion.div
-                  className="absolute -inset-1 bg-gradient-to-br from-amber-500/20 to-amber-600/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100"
-                  transition={{ duration: 0.3 }}
-                />
-
-                {/* Card */}
-                <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-6 border-2 border-amber-500/20 shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
-                  {/* Icon with Pulse Animation */}
-                  <motion.div
-                    className={`inline-flex p-4 bg-gradient-to-br ${feature.color} rounded-xl mb-4 shadow-lg w-fit relative`}
-                    whileHover={{
-                      rotate: [0, -5, 5, -5, 0],
-                      scale: 1.1,
-                    }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {/* Pulse Ring */}
-                    <motion.div
-                      className="absolute inset-0 rounded-xl bg-amber-500"
-                      animate={{
-                        scale: [1, 1.3, 1],
-                        opacity: [0.5, 0, 0.5],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                    />
+                <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-amber-500/20 shadow-md hover:shadow-xl transition-all duration-300 h-full">
+                  <div className="inline-flex p-4 bg-gradient-to-br from-amber-500/50 to-amber-600/50 rounded-xl mb-4 shadow w-fit relative">
+                    {!reduceMotion && (
+                      <motion.div
+                        className="absolute inset-0 rounded-xl bg-amber-500"
+                        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    )}
                     <Icon className="w-7 h-7 text-white relative z-10" />
-                  </motion.div>
-
-                  {/* Title */}
+                  </div>
                   <h3 className="text-xl font-bold text-neutral-900 mb-3">
                     {feature.title}
                   </h3>
-
-                  {/* Description */}
                   <p className="text-neutral-700 leading-relaxed">
                     {feature.description}
                   </p>
-
-                  {/* Decorative Corner */}
-                  <motion.div
-                    className="absolute top-0 left-0 w-20 h-20 opacity-5"
-                    animate={{
-                      rotate: [0, 360],
-                    }}
-                    transition={{
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  >
-                    <Icon className="w-full h-full text-amber-600" />
-                  </motion.div>
                 </div>
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
 
         {/* CTA Section */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
+        <div className="mt-16 text-center">
           <Link href="/Pages/Contact">
             <motion.button
-              className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-lg rounded-xl shadow-2xl shadow-amber-500/40 flex items-center justify-center gap-3 mx-auto"
+              className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-lg rounded-xl shadow-xl flex items-center justify-center gap-3 mx-auto"
               whileHover={{
-                scale: 1.05,
-                boxShadow: "0 25px 50px rgba(251, 191, 36, 0.5)",
+                scale: reduceMotion ? 1 : 1.05,
+                boxShadow: "0 20px 40px rgba(251, 191, 36, 0.4)",
               }}
               whileTap={{ scale: 0.95 }}
             >
@@ -450,8 +351,8 @@ export default function FeaturesSection() {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                whileHover={{ x: -5 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                whileHover={{ x: reduceMotion ? 0 : -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 <path
                   strokeLinecap="round"
@@ -462,7 +363,7 @@ export default function FeaturesSection() {
               </motion.svg>
             </motion.button>
           </Link>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
