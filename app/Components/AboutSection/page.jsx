@@ -22,9 +22,9 @@ export default function AboutSection() {
   const floatingSlow = reduceMotion
     ? {}
     : {
-        x: [0, 30, -20, 0],
-        y: [0, -20, 20, 0],
-        scale: [1, 1.05, 0.95, 1],
+        x: [0, 20, -15, 0],
+        y: [0, -15, 15, 0],
+        scale: [1, 1.03, 0.97, 1],
       };
 
   return (
@@ -36,12 +36,12 @@ export default function AboutSection() {
         {!reduceMotion && (
           <>
             <motion.div
-              className="absolute top-1/4 -left-24 w-[38rem] h-[38rem] bg-gradient-to-br from-amber-300/20 to-amber-400/15 rounded-full blur-2xl"
+              className="absolute top-1/4 -left-24 w-[38rem] h-[38rem] sm:w-[20rem] sm:h-[20rem] bg-gradient-to-br from-amber-300/20 to-amber-400/15 rounded-full blur-xl sm:blur-lg will-change-transform"
               animate={floatingSlow}
               transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div
-              className="absolute bottom-1/4 -right-24 w-[38rem] h-[38rem] bg-gradient-to-br from-yellow-300/15 to-amber-500/15 rounded-full blur-2xl"
+              className="absolute bottom-1/4 -right-24 w-[38rem] h-[38rem] sm:w-[20rem] sm:h-[20rem] bg-gradient-to-br from-yellow-300/15 to-amber-500/15 rounded-full blur-xl sm:blur-lg will-change-transform"
               animate={floatingSlow}
               transition={{
                 duration: 32,
@@ -69,20 +69,20 @@ export default function AboutSection() {
           <div className="relative group">
             {/* Glow Border */}
             <motion.div
-              className="absolute -inset-5 bg-gradient-to-br from-amber-500/30 to-amber-600/20 rounded-[2.5rem] blur-xl"
+              className="absolute -inset-5 bg-gradient-to-br from-amber-500/30 to-amber-600/20 rounded-[2.5rem] blur-lg sm:blur-md will-change-transform"
               animate={
                 reduceMotion
                   ? {}
-                  : { scale: [1, 1.08, 1], opacity: [0.4, 0.8, 0.4] }
+                  : { scale: [1, 1.06, 1], opacity: [0.4, 0.8, 0.4] }
               }
               transition={{ duration: 6, repeat: Infinity }}
             />
 
             {/* Image Box */}
             <motion.div
-              whileHover={{ scale: 1.03 }}
+              whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 260 }}
-              className="relative h-[420px] sm:h-[520px] lg:h-[620px] rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-600/30"
+              className="relative h-[420px] sm:h-[400px] lg:h-[620px] rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-600/30"
             >
               <Image
                 src="/img/MainPic0.jpg"
@@ -101,12 +101,12 @@ export default function AboutSection() {
                 whileInView={{ scale: 1, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 220 }}
-                whileHover={{ scale: 1.1, rotate: 6 }}
+                whileHover={{ scale: 1.08, rotate: 5 }}
               >
                 <div className="flex items-center gap-3">
                   <motion.span
                     className="text-3xl"
-                    animate={reduceMotion ? {} : { rotate: [0, -8, 8, 0] }}
+                    animate={reduceMotion ? {} : { rotate: [0, -6, 6, 0] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
                     ⚖️
@@ -131,12 +131,12 @@ export default function AboutSection() {
         >
           {/* Badge */}
           <motion.div
-            whileHover={{ scale: 1.08 }}
+            whileHover={{ scale: 1.06 }}
             className="inline-flex items-center px-5 py-2.5 bg-white/80 backdrop-blur rounded-full border border-amber-600/30 shadow-lg"
           >
             <motion.span
               className="w-2.5 h-2.5 bg-amber-600 rounded-full ml-2"
-              animate={reduceMotion ? {} : { scale: [1, 1.4, 1] }}
+              animate={reduceMotion ? {} : { scale: [1, 1.3, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
             <span className="text-amber-900 text-2xl font-medium">من نحن</span>
@@ -177,14 +177,14 @@ export default function AboutSection() {
               <motion.div
                 key={i}
                 whileHover={{
-                  y: -6,
-                  boxShadow: "0 18px 40px rgba(251,191,36,0.25)",
+                  y: -5,
+                  boxShadow: "0 16px 35px rgba(251,191,36,0.25)",
                 }}
                 transition={{ type: "spring", stiffness: 260 }}
                 className="flex gap-4 p-5 bg-white/70 backdrop-blur rounded-2xl border border-amber-500/20 shadow-sm"
               >
                 <motion.span
-                  whileHover={{ scale: 1.3, rotate: 12 }}
+                  whileHover={{ scale: 1.25, rotate: 10 }}
                   transition={{ type: "spring", stiffness: 400 }}
                   className="text-3xl"
                 >
@@ -202,8 +202,8 @@ export default function AboutSection() {
           <Link href="/Pages/Features">
             <motion.button
               whileHover={{
-                scale: 1.06,
-                boxShadow: "0 22px 50px rgba(251,191,36,0.45)",
+                scale: 1.05,
+                boxShadow: "0 20px 45px rgba(251,191,36,0.35)",
               }}
               whileTap={{ scale: 0.95 }}
               className="mt-6 inline-flex items-center gap-2 px-9 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xl"
