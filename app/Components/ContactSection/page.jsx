@@ -191,45 +191,27 @@ export default function ContactSection() {
         </motion.div>
 
         {/* Contact Info Cards */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+        <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {CONTACT_INFO.map((item) => {
             const Icon = item.icon;
             return (
               <motion.a
                 key={item.id}
                 href={item.link}
-                variants={itemVariants}
-                whileHover={{
-                  y: -10,
-                  transition: { type: "spring", stiffness: 400 },
-                }}
                 className="relative group cursor-pointer"
+                whileHover={{ y: -5 }} // رفع البطاقة فقط
               >
                 {/* Glow Effect */}
-                <motion.div
-                  className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 to-amber-600/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100"
-                  transition={{ duration: 0.3 }}
-                />
+                <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 to-amber-600/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 {/* Card */}
-                <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-6 border-2 border-amber-500/20 shadow-lg hover:shadow-2xl transition-all duration-300 text-center">
+                <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-6 border-2 border-amber-500/20 shadow-lg transition-shadow duration-300 text-center group-hover:shadow-xl">
                   {/* Icon */}
-                  <motion.div
+                  <div
                     className={`inline-flex p-4 bg-gradient-to-br ${item.color} rounded-xl mb-4 shadow-lg mx-auto`}
-                    whileHover={{
-                      rotate: [0, -10, 10, -10, 0],
-                      scale: 1.1,
-                    }}
-                    transition={{ duration: 0.5 }}
                   >
                     <Icon className="w-6 h-6 text-white" />
-                  </motion.div>
+                  </div>
 
                   {/* Title */}
                   <h3 className="text-lg font-bold text-neutral-900 mb-2">
@@ -240,8 +222,6 @@ export default function ContactSection() {
                   <p className="text-amber-600 font-semibold mb-1">
                     {item.info}
                   </p>
-
-                  {/* Sub Info */}
                   <p className="text-sm text-neutral-600">{item.subInfo}</p>
                 </div>
               </motion.a>
