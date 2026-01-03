@@ -4,6 +4,8 @@ import Link from "next/link";
 import Footer from "./Components/Footer/page";
 import Header from "./Components/Header/page";
 import Head from "next/head";
+import Script from "next/script";
+
 import { localFont } from "next/font/local";
 
 const geistSans = Geist({
@@ -29,15 +31,30 @@ const tajawal = localFont({
 export default function RootLayout({ children }) {
   return (
     <html lang="ar" className={tajawal.className}>
-      <Head>
+      <head>
         <link rel="icon" type="image/png" href="/img/Avatar.png" />
-      </Head>
+      </head>
 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
+        {/* Google Analytics */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-PVEZ8977CT"
+        />
 
+        <Script id="ga-script">
+          {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PVEZ8977CT');
+`}
+        </Script>
+
+        <Header />
         {children}
         <Footer />
       </body>
