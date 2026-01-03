@@ -199,7 +199,6 @@ export default function ServicesSection() {
           </motion.p>
         </motion.div>
 
-        {/* Services Grid */}
         <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {SERVICES.map((service) => {
             const Icon = service.icon;
